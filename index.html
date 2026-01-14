@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>探究环境因素对植物光合作用强度的影响</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .main-container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 35px;
+            background: linear-gradient(135deg, #1e7e34, #34a853);
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(30, 126, 52, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+        
+        h1 {
+            margin-bottom: 15px;
+            font-size: 2.8em;
+            position: relative;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.25em;
+            opacity: 0.95;
+            position: relative;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 450px 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .design-panel, .analysis-panel {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        h2 {
+            color: #1e7e34;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #c8e6c9;
+            display: flex;
+            align-items: center;
+            position: relative;
+            font-weight: 600;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #34a853, #1e7e34);
+        }
+        
+        h2 i {
+            margin-right: 12px;
+            background: linear-gradient(135deg, #34a853, #1e7e34);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-left: 5px solid #34a853;
+            padding: 22px;
+            margin-bottom: 30px;
+            border-radius: 0 15px 15px 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(52, 168, 83, 0.2);
+        }
+        
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #34a853, #1e7e34);
+        }
+        
+        .info-box h3 {
+            color: #1e7e34;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        
+        .info-box ul {
+            padding-left: 20px;
+        }
+        
+        .info-box li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 5px;
+        }
+        
+        .info-box li::before {
+            content: '•';
+            color: #34a853;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .material-list {
+            background: linear-gradient(135deg, #f1f8e9, #e8f5e9);
+            border: 2px solid #c8e6c9;
+            border-radius: 15px;
+            padding: 22px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .material-list::before {
+            content: '🧪';
+            position: absolute;
+            top: -18px;
+            right: 25px;
+            font-size: 28px;
+            background: white;
+            padding: 8px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid #c8e6c9;
+        }
+        
+        .material-list h3 {
+            color: #1e7e34;
+            margin-bottom: 18px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        
+        .material-category {
+            margin-bottom: 20px;
+        }
+        
+        .material-category h4 {
+            color: #34a853;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            padding-left: 12px;
+            border-left: 4px solid #34a853;
+            font-weight: 600;
+        }
+        
+        .material-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .material-item {
+            background: white;
+            border: 1px solid #c8e6c9;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 0.95em;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            color: #2e7d32;
+            font-weight: 500;
+        }
+        
+        .material-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border-color: #34a853;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        }
+        
+        .control-group {
+            margin: 25px 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #1e7e34;
+            font-size: 1.1em;
+        }
+        
+        select, input[type="number"] {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #c8e6c9;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            background: white;
+            transition: all 0.3s;
+            color: #333;
+        }
+        
+        select:focus, input[type="number"]:focus {
+            border-color: #34a853;
+            box-shadow: 0 0 0 4px rgba(52, 168, 83, 0.1);
+            outline: none;
+        }
+        
+        .variable-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .variable-option {
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .variable-option:hover {
+            border-color: #34a853;
+            background: linear-gradient(135deg, #f1f8e9, #e8f5e9);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .variable-option.selected {
+            border-color: #34a853;
+            background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+            box-shadow: 0 6px 15px rgba(52, 168, 83, 0.2);
+        }
+        
+        .param-inputs {
+            margin: 25px 0;
+        }
+        
+        .param-input-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 14px;
+            background: linear-gradient(135deg, #f1f8e9, #e8f5e9);
+            border-radius: 10px;
+            transition: all 0.3s;
+            border: 1px solid rgba(200, 230, 201, 0.8);
+        }
+        
+        .param-input-row:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .param-input-row label {
+            min-width: 120px;
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+        
+        .param-input-row input {
+            flex-grow: 1;
+            margin-bottom: 0;
+            padding: 12px;
+        }
+        
+        .unit {
+            margin-left: 10px;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .apparatus-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        
+        .apparatus {
+            border: 2px solid #c8e6c9;
+            border-radius: 15px;
+            padding: 22px;
+            background: linear-gradient(135deg, #f1f8e9, #e8f5e9);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .apparatus:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+            border-color: #34a853;
+        }
+        
+        .apparatus h4 {
+            margin-bottom: 15px;
+            color: #1e7e34;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        
+        .apparatus-visual {
+            position: relative;
+            height: 280px;
+            margin: 15px 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(200, 230, 201, 0.8);
+        }
+        
+        /* 实验装置简笔画样式 */
+        .experiment-setup {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        
+        .beaker {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 140px;
+            border: 3px solid #4a90e2;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            background: rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+        }
+        
+        .beaker::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70%;
+            background: linear-gradient(to bottom, rgba(74, 144, 226, 0.2), rgba(74, 144, 226, 0.1));
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .plant {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            z-index: 2;
+            color: #1e7e34;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
+            animation: plant-grow 3s infinite alternate;
+        }
+        
+        @keyframes plant-grow {
+            0% { transform: translateX(-50%) scale(1); }
+            100% { transform: translateX(-50%) scale(1.05); }
+        }
+        
+        .light-source {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+        
+        .light-beam {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 0;
+            background: linear-gradient(to bottom, rgba(255, 204, 0, 0.8), rgba(255, 153, 0, 0.3));
+            transition: height 0.3s;
+            z-index: 5;
+        }
+        
+        .sensors {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 10;
+        }
+        
+        .sensor {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #34a853, #1e7e34);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .data-line {
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 2px;
+            background: #666;
+        }
+        
+        .bubbles-container {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+        }
+        
+        .bubble {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(33, 150, 243, 0.8);
+            border-radius: 50%;
+            animation: bubble-rise 2s linear infinite;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
+        }
+        
+        @keyframes bubble-rise {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        .apparatus-data {
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            border: 1px solid #e0f2e1;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .data-label {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .data-value {
+            color: #1e7e34;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #34a853, #1e7e34);
+            color: white;
+            border: none;
+            padding: 18px 32px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            box-shadow: 0 6px 15px rgba(52, 168, 83, 0.3);
+            letter-spacing: 0.5px;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(52, 168, 83, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(-1px);
+        }
+        
+        button i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        button.reset {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            box-shadow: 0 6px 15px rgba(244, 67, 54, 0.3);
+        }
+        
+        button.reset:hover {
+            box-shadow: 0 10px 25px rgba(244, 67, 54, 0.4);
+        }
+        
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .time-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 25px 0;
+            padding: 22px;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 15px;
+            border: 2px solid #a5d6a7;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .time-display {
+            font-weight: 700;
+            color: #1e7e34;
+            margin: 0 15px;
+            font-size: 1.5em;
+            background: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .speed-control {
+            margin-left: 30px;
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .speed-control label {
+            margin-right: 12px;
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #1e7e34;
+        }
+        
+        .speed-control select {
+            width: auto;
+            margin-bottom: 0;
+            padding: 10px 18px;
+            font-weight: 600;
+        }
+        
+        .charts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .chart-section {
+            background: white;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .chart-title {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #1e7e34;
+            padding-bottom: 18px;
+            border-bottom: 2px solid #c8e6c9;
+        }
+        
+        .chart-container {
+            height: 420px;
+            position: relative;
+        }
+        
+        .chart-placeholder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #888;
+            font-style: italic;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .real-time-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            padding: 18px;
+            background: linear-gradient(135deg, #f1f8e9, #e8f5e9);
+            border-radius: 15px;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 15px;
+            margin-bottom: 5px;
+            padding: 10px 18px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0f2e1;
+        }
+        
+        .legend-color {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            font-size: 0.95em;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .apparatus-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <h1>探究环境因素对植物光合作用强度的影响</h1>
+            <p class="subtitle">自主设计实验 · 实时数据监测 · 多维度数据分析</p>
+        </header>
+        
+        <div class="container">
+            <div class="design-panel">
+                <h2><i class="fas fa-flask"></i> 实验设计</h2>
+                
+                <div class="material-list">
+                    <h3><i class="fas fa-vial"></i> 实验材料</h3>
+                    <div class="material-category">
+                        <h4><i class="fas fa-seedling"></i> 生物材料</h4>
+                        <div class="material-items">
+                            <span class="material-item">黑藻</span>
+                            <span class="material-item">碳酸氢钠溶液</span>
+                            <span class="material-item">蒸馏水</span>
+                            <span class="material-item">pH缓冲液</span>
+                        </div>
+                    </div>
+                    <div class="material-category">
+                        <h4><i class="fas fa-lightbulb"></i> 光源设备</h4>
+                        <div class="material-items">
+                            <span class="material-item">可调光强LED灯</span>
+                            <span class="material-item">红光LED灯 (660nm)</span>
+                            <span class="material-item">蓝光LED灯 (450nm)</span>
+                            <span class="material-item">白光LED灯</span>
+                        </div>
+                    </div>
+                    <div class="material-category">
+                        <h4><i class="fas fa-microscope"></i> 检测仪器</h4>
+                        <div class="material-items">
+                            <span class="material-item">氧气传感器</span>
+                            <span class="material-item">pH传感器</span>
+                            <span class="material-item">数据采集器</span>
+                            <span class="material-item">密闭透明反应室</span>
+                        </div>
+                    </div>
+                    <div class="material-category">
+                        <h4><i class="fas fa-tools"></i> 实验器材</h4>
+                        <div class="material-items">
+                            <span class="material-item">密闭反应室</span>
+                            <span class="material-item">烧杯</span>
+                            <span class="material-item">温度控制器</span>
+                            <span class="material-item">磁力搅拌器</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h3><i class="fas fa-chart-line"></i> 实验参数参考范围</h3>
+                    <ul>
+                        <li><strong>光强度</strong>: 光合作用有效范围 1000-120000 lux</li>
+                        <li><strong>温度</strong>: 光合作用适宜温度 15-35°C，最适温度 25-30°C</li>
+                        <li><strong>碳酸氢钠浓度</strong>: 常用浓度 0.1-2.0% (w/v)，对应CO₂释放量 200-2000 ppm</li>
+                        <li><strong>pH值</strong>: 光合作用适宜pH 6.0-8.0，最适pH 7.0-7.5</li>
+                        <li><strong>光的波长</strong>: 可见光范围 400-700 nm，光合作用有效光: 红光(620-750 nm)，蓝光(450-495 nm)</li>
+                        <li><strong>实验时长</strong>: 光合作用观察通常 5-30 分钟</li>
+                    </ul>
+                </div>
+                
+                <div class="control-group">
+                    <label><i class="fas fa-sliders-h"></i> 1. 选择自变量：</label>
+                    <select id="independentVar">
+                        <option value="light">光强度 (lux)</option>
+                        <option value="temperature">温度 (°C)</option>
+                        <option value="nahco3">碳酸氢钠溶液浓度 (%)</option>
+                        <option value="ph">pH值</option>
+                        <option value="wavelength">光的波长 (nm)</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label><i class="fas fa-chart-bar"></i> 2. 选择应变量：</label>
+                    <div class="variable-options">
+                        <div class="variable-option selected" data-value="oxygen-concentration">
+                            <div>氧气浓度</div>
+                            <div style="font-size:0.9em;color:#666;">ppm</div>
+                        </div>
+                        <div class="variable-option" data-value="oxygen-rate">
+                            <div>氧气释放速率</div>
+                            <div style="font-size:0.9em;color:#666;">mL/h</div>
+                        </div>
+                        <div class="variable-option" data-value="co2-rate">
+                            <div>二氧化碳吸收速率</div>
+                            <div style="font-size:0.9em;color:#666;">μmol/m²/s</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label><i class="fas fa-layer-group"></i> 3. 设置实验组数：</label>
+                    <input type="number" id="groupCount" min="2" max="10" value="3" onchange="generateParamInputs()">
+                </div>
+                
+                <div class="control-group">
+                    <div id="paramInputs" class="param-inputs">
+                        <!-- 参数输入框将在这里动态生成 -->
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label><i class="fas fa-clock"></i> 5. 设置光合作用时长：</label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <input type="number" id="experimentDuration" min="1" max="60" value="10" style="width: 100px;">
+                        <span style="font-weight: bold; color: #1e7e34;">分钟</span>
+                    </div>
+                    <div style="margin-top: 5px; font-size: 0.9em; color: #666;">
+                        <i>提示：实验时长决定数据采集的时间范围</i>
+                    </div>
+                </div>
+                
+                <button onclick="generateApparatus()"><i class="fas fa-cogs"></i> 生成实验装置</button>
+                
+                <div id="apparatusSection" style="display:none;">
+                    <h3 style="margin-top:30px; color: #1e7e34;"><i class="fas fa-vial"></i> 实验装置</h3>
+                    <div id="apparatusContainer" class="apparatus-container">
+                        <!-- 实验装置将在这里动态生成 -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="analysis-panel">
+                <h2><i class="fas fa-chart-pie"></i> 数据分析</h2>
+                
+                <div class="button-group">
+                    <button onclick="startExperiment()" id="startBtn"><i class="fas fa-play"></i> 开始实验</button>
+                    <button onclick="recordData()" id="recordBtn" disabled><i class="fas fa-table"></i> 数据整理</button>
+                    <button onclick="resetExperiment()" class="reset"><i class="fas fa-redo"></i> 重置实验</button>
+                </div>
+                
+                <div class="time-control">
+                    <span style="font-weight: bold; color: #1e7e34;">实验时间:</span>
+                    <span id="timeDisplay" class="time-display">0:00</span>
+                    <div class="speed-control">
+                        <label style="font-weight: bold; color: #1e7e34;">模拟速度:</label>
+                        <select id="speedControl" onchange="changeSpeed()">
+                            <option value="1">1× 实时</option>
+                            <option value="2" selected>2× 加速</option>
+                            <option value="5">5× 快速</option>
+                            <option value="10">10× 极速</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="charts-container">
+                    <div class="chart-section">
+                        <div class="chart-title"><i class="fas fa-chart-line"></i> 实时监测曲线 - 应变量随时间变化</div>
+                        <div class="chart-container">
+                            <canvas id="realTimeChart"></canvas>
+                            <div id="realTimePlaceholder" class="chart-placeholder">
+                                点击"开始实验"后，将显示实时监测数据
+                            </div>
+                        </div>
+                        <div id="realTimeLegend" class="real-time-legend"></div>
+                    </div>
+                    
+                    <div class="chart-section">
+                        <div class="chart-title"><i class="fas fa-chart-bar"></i> 数据分析柱状图 - 自变量对应变量影响</div>
+                        <div class="chart-container">
+                            <canvas id="barChart"></canvas>
+                            <div id="barChartPlaceholder" class="chart-placeholder">
+                                记录数据后，将显示各实验组结果对比
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="lineChartSection" class="chart-section" style="display: none;">
+                        <div class="chart-title"><i class="fas fa-chart-line"></i> 自变量与应变量关系折线图</div>
+                        <div class="chart-container">
+                            <canvas id="lineChart"></canvas>
+                            <div id="lineChartPlaceholder" class="chart-placeholder">
+                                当实验组数≥5时，将显示折线图分析
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>高中生物探究实验 · 光合作用影响因素模拟 · 基于科学模型计算</p>
+            <p>设计用于帮助学生理解实验设计、变量控制和数据分析</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // 全局变量
+        let experimentRunning = false;
+        let experimentTime = 0; // 单位：秒
+        let timeInterval;
+        let simulationSpeed = 2; // 默认2倍速
+        let experimentGroups = [];
+        let recordedData = [];
+        let realTimeChart, barChart, lineChart;
+        let maxExperimentTime = 600; // 默认10分钟（600秒）
+        
+        // 环境参考数据
+        const envData = {
+            light: {
+                min: 1000,
+                max: 120000,
+                unit: "lux",
+                description: "光强度范围",
+                suggestions: [5000, 15000, 30000, 50000, 80000, 100000]
+            },
+            temperature: {
+                min: 15,
+                max: 35,
+                unit: "°C",
+                description: "温度范围",
+                suggestions: [18, 22, 25, 28, 32, 35]
+            },
+            nahco3: {
+                min: 0.1,
+                max: 2.0,
+                unit: "%",
+                description: "碳酸氢钠溶液浓度范围",
+                suggestions: [0.2, 0.5, 0.8, 1.0, 1.5, 2.0]
+            },
+            ph: {
+                min: 6.0,
+                max: 8.0,
+                unit: "",
+                description: "pH值范围",
+                suggestions: [6.0, 6.5, 7.0, 7.5, 8.0]
+            },
+            wavelength: {
+                min: 400,
+                max: 700,
+                unit: "nm",
+                description: "光的波长范围",
+                suggestions: [420, 450, 500, 550, 600, 650, 680, 700],
+                colors: {
+                    420: '#3f51b5', // 蓝紫光
+                    450: '#2196f3', // 蓝光
+                    500: '#4caf50', // 绿光
+                    550: '#8bc34a', // 黄绿光
+                    600: '#ff9800', // 橙光
+                    650: '#ff5722', // 红光
+                    680: '#f44336', // 深红光
+                    700: '#d32f2f'  // 远红光
+                }
+            }
+        };
+        
+        // 颜色方案 - 更现代、清晰
+        const chartColors = [
+            '#34a853', '#4285f4', '#ea4335', '#fbbc04', '#8e44ad', 
+            '#00bcd4', '#ff9800', '#9c27b0', '#3f51b5', '#009688'
+        ];
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 应变量选项点击事件
+            document.querySelectorAll('.variable-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.variable-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                });
+            });
+            
+            // 实验时长变化事件
+            document.getElementById('experimentDuration').addEventListener('change', function() {
+                maxExperimentTime = parseInt(this.value) * 60; // 转换为秒
+            });
+            
+            // 生成参数输入框
+            generateParamInputs();
+        });
+        
+        // 生成参数输入框
+        function generateParamInputs() {
+            const independentVar = document.getElementById('independentVar').value;
+            const groupCount = parseInt(document.getElementById('groupCount').value);
+            const paramInputsDiv = document.getElementById('paramInputs');
+            
+            paramInputsDiv.innerHTML = '<h4 style="color: #1e7e34; margin-bottom: 15px;"><i class="fas fa-sliders-h"></i> 4. 设置各实验组参数：</h4>';
+            
+            const varInfo = envData[independentVar];
+            
+            for (let i = 1; i <= groupCount; i++) {
+                const suggestion = varInfo.suggestions[i-1] || 
+                    Math.round(varInfo.min + (i-1) * (varInfo.max - varInfo.min) / (groupCount - 1) * 100) / 100;
+                
+                const row = document.createElement('div');
+                row.className = 'param-input-row';
+                
+                if (independentVar === 'wavelength') {
+                    row.innerHTML = `
+                        <label>实验组 ${i}:</label>
+                        <input type="number" id="param${i}" min="${varInfo.min}" max="${varInfo.max}" value="${suggestion}" step="10">
+                        <span class="unit">${varInfo.unit}</span>
+                        <span id="wavelengthColor${i}" style="width:24px;height:24px;border-radius:50%;margin-left:10px;display:inline-block;border:2px solid white;box-shadow:0 3px 6px rgba(0,0,0,0.2);"></span>
+                    `;
+                } else {
+                    const step = independentVar === 'nahco3' ? 0.1 : (independentVar === 'temperature' ? 0.5 : (independentVar === 'ph' ? 0.1 : 1));
+                    row.innerHTML = `
+                        <label>实验组 ${i}:</label>
+                        <input type="number" id="param${i}" min="${varInfo.min}" max="${varInfo.max}" value="${suggestion}" step="${step}">
+                        <span class="unit">${independentVar === 'ph' ? '' : varInfo.unit}</span>
+                    `;
+                }
+                
+                paramInputsDiv.appendChild(row);
+            }
+            
+            // 更新波长颜色显示
+            if (independentVar === 'wavelength') {
+                updateWavelengthColors();
+            }
+        }
+        
+        // 更新波长颜色显示
+        function updateWavelengthColors() {
+            const groupCount = parseInt(document.getElementById('groupCount').value);
+            for (let i = 1; i <= groupCount; i++) {
+                const value = document.getElementById(`param${i}`).value;
+                const colorElement = document.getElementById(`wavelengthColor${i}`);
+                if (colorElement) {
+                    const color = getWavelengthColor(value);
+                    colorElement.style.backgroundColor = color;
+                    colorElement.title = getWavelengthName(value);
+                }
+            }
+        }
+        
+        // 根据波长获取颜色
+        function getWavelengthColor(wavelength) {
+            const w = parseInt(wavelength);
+            if (w <= 440) return '#3f51b5'; // 蓝紫光
+            if (w <= 490) return '#2196f3'; // 蓝光
+            if (w <= 520) return '#4caf50'; // 绿光
+            if (w <= 570) return '#8bc34a'; // 黄绿光
+            if (w <= 590) return '#ffeb3b'; // 黄光
+            if (w <= 620) return '#ff9800'; // 橙光
+            if (w <= 670) return '#ff5722'; // 红光
+            return '#d32f2f'; // 深红光
+        }
+        
+        // 根据波长获取名称
+        function getWavelengthName(wavelength) {
+            const w = parseInt(wavelength);
+            if (w <= 440) return '蓝紫光';
+            if (w <= 490) return '蓝光';
+            if (w <= 520) return '绿光';
+            if (w <= 570) return '黄绿光';
+            if (w <= 590) return '黄光';
+            if (w <= 620) return '橙光';
+            if (w <= 670) return '红光';
+            return '深红光';
+        }
+        
+        // 生成实验装置
+        function generateApparatus() {
+            const independentVar = document.getElementById('independentVar').value;
+            const groupCount = parseInt(document.getElementById('groupCount').value);
+            const apparatusSection = document.getElementById('apparatusSection');
+            const apparatusContainer = document.getElementById('apparatusContainer');
+            
+            apparatusContainer.innerHTML = '';
+            experimentGroups = [];
+            
+            // 启用开始实验按钮
+            document.getElementById('startBtn').disabled = false;
+            
+            for (let i = 1; i <= groupCount; i++) {
+                const paramValue = document.getElementById(`param${i}`).value;
+                
+                // 创建实验组对象
+                const group = {
+                    id: i,
+                    independentVar: independentVar,
+                    independentValue: parseFloat(paramValue),
+                    initialO2Concentration: 210000, // 初始氧气浓度 (ppm, 约21%)
+                    initialCO2Concentration: 400,   // 初始二氧化碳浓度 (ppm)
+                    currentO2Concentration: 210000,
+                    currentCO2Concentration: 400,
+                    oxygenRate: 0,
+                    co2Rate: 0,
+                    timeData: [],
+                    o2ConcentrationData: [],
+                    co2ConcentrationData: [],
+                    oxygenRateData: [],
+                    co2RateData: []
+                };
+                experimentGroups.push(group);
+                
+                // 创建实验装置可视化
+                const apparatus = document.createElement('div');
+                apparatus.className = 'apparatus';
+                
+                let lightBeamHeight = 0;
+                let lightColor = '#ffcc00';
+                let lightIntensity = 1;
+                
+                // 根据自变量类型设置不同的视觉效果
+                if (independentVar === 'light') {
+                    lightIntensity = Math.min(1, paramValue / 120000);
+                    lightBeamHeight = 80 * lightIntensity;
+                    lightColor = `rgb(${255 - (lightIntensity * 100)}, ${204 - (lightIntensity * 50)}, ${0})`;
+                } else if (independentVar === 'wavelength') {
+                    lightColor = getWavelengthColor(paramValue);
+                    lightBeamHeight = 80;
+                } else {
+                    lightBeamHeight = 80;
+                }
+                
+                apparatus.innerHTML = `
+                    <h4>实验组 ${i}</h4>
+                    <div class="apparatus-visual">
+                        <div class="experiment-setup">
+                            <div class="beaker"></div>
+                            <div class="plant">🌿</div>
+                            <div class="light-source" style="background: linear-gradient(135deg, ${lightColor}, ${lightColor}dd)">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="light-beam" style="height: ${lightBeamHeight}px; background: linear-gradient(to bottom, ${lightColor}cc, ${lightColor}33)"></div>
+                            <div class="sensors">
+                                <div class="sensor" title="氧气传感器">
+                                    <i class="fas fa-wind"></i>
+                                </div>
+                                <div class="sensor" title="pH传感器">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                            </div>
+                            <div class="data-line"></div>
+                            <div class="bubbles-container" id="bubbles${i}">
+                                <!-- 气泡将通过JS生成 -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="apparatus-data">
+                        <div class="data-item">
+                            <span class="data-label">${getVarName(independentVar)}:</span>
+                            <span class="data-value">${paramValue}${getVarUnit(independentVar)}</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="data-label" id="dependentLabel${i}">${getDependentName()}:</span>
+                            <span class="data-value" id="reading${i}">${getInitialDependentValue()}</span>
+                        </div>
+                    </div>
+                `;
+                apparatusContainer.appendChild(apparatus);
+            }
+            
+            apparatusSection.style.display = 'block';
+            
+            // 启用记录按钮
+            document.getElementById('recordBtn').disabled = false;
+        }
+        
+        // 获取变量名称
+        function getVarName(varType) {
+            switch(varType) {
+                case 'light': return '光强度';
+                case 'temperature': return '温度';
+                case 'nahco3': return '碳酸氢钠浓度';
+                case 'ph': return 'pH值';
+                case 'wavelength': return '光的波长';
+                default: return '';
+            }
+        }
+        
+        // 获取变量单位
+        function getVarUnit(varType) {
+            switch(varType) {
+                case 'light': return ' lux';
+                case 'temperature': return '°C';
+                case 'nahco3': return ' %';
+                case 'ph': return '';
+                case 'wavelength': return ' nm';
+                default: return '';
+            }
+        }
+        
+        // 获取应变量单位
+        function getDependentUnit() {
+            const selectedOption = document.querySelector('.variable-option.selected');
+            const value = selectedOption.dataset.value;
+            
+            switch(value) {
+                case 'oxygen-concentration': return ' ppm';
+                case 'oxygen-rate': return ' mL/h';
+                case 'co2-rate': return ' μmol/m²/s';
+                default: return '';
+            }
+        }
+        
+        // 获取应变量名称
+        function getDependentName() {
+            const selectedOption = document.querySelector('.variable-option.selected');
+            const value = selectedOption.dataset.value;
+            
+            switch(value) {
+                case 'oxygen-concentration': return '氧气浓度';
+                case 'oxygen-rate': return '氧气释放速率';
+                case 'co2-rate': return '二氧化碳吸收速率';
+                default: return '';
+            }
+        }
+        
+        // 获取应变量类型
+        function getDependentType() {
+            const selectedOption = document.querySelector('.variable-option.selected');
+            return selectedOption.dataset.value;
+        }
+        
+        // 获取初始应变量值
+        function getInitialDependentValue() {
+            const type = getDependentType();
+            
+            switch(type) {
+                case 'oxygen-concentration': return '210000';
+                case 'oxygen-rate': return '0.00';
+                case 'co2-rate': return '0.00';
+                default: return '0.00';
+            }
+        }
+        
+        // 计算光合作用速率（简化模型）
+        function calculatePhotosynthesisRates(group) {
+            const independentVar = group.independentVar;
+            const independentValue = group.independentValue;
+            
+            // 假设其他变量保持恒定
+            const light = independentVar === 'light' ? independentValue : 50000;
+            const temp = independentVar === 'temperature' ? independentValue : 25;
+            const nahco3 = independentVar === 'nahco3' ? independentValue : 0.8;
+            const ph = independentVar === 'ph' ? independentValue : 7.0;
+            const wavelength = independentVar === 'wavelength' ? independentValue : 550;
+            
+            // 碳酸氢钠浓度转换为CO₂可用性
+            const co2Availability = nahco3 / 2.0; // 假设2%为最大CO₂供应
+            
+            // pH影响（钟形曲线，最适pH 7.0）
+            const phDiff = Math.abs(ph - 7.0);
+            const phEffect = Math.exp(-0.5 * phDiff * phDiff);
+            
+            // 光强影响（米氏方程简化）
+            const lightEffect = light / (2000 + light);
+            
+            // 温度影响（钟形曲线，最适温度25°C）
+            const tempDiff = Math.abs(temp - 25);
+            const tempEffect = Math.exp(-0.015 * tempDiff * tempDiff);
+            
+            // CO₂影响（基于碳酸氢钠浓度）
+            const co2Effect = co2Availability / (0.5 + co2Availability);
+            
+            // 波长影响（光合作用效率曲线）
+            let wavelengthEffect;
+            if (wavelength <= 440) {
+                wavelengthEffect = 0.4 + 0.3 * (wavelength - 400) / 40;
+            } else if (wavelength <= 490) {
+                wavelengthEffect = 0.7 + 0.2 * (wavelength - 440) / 50;
+            } else if (wavelength <= 570) {
+                wavelengthEffect = 0.5 + 0.2 * (570 - wavelength) / 80;
+            } else if (wavelength <= 620) {
+                wavelengthEffect = 0.6 + 0.3 * (wavelength - 570) / 50;
+            } else {
+                wavelengthEffect = 0.8 + 0.2 * (700 - wavelength) / 80;
+            }
+            
+            // 基础光合作用速率
+            let photoRate = 12 * lightEffect * tempEffect * co2Effect * wavelengthEffect * phEffect;
+            
+            // 添加一些随机变异（±8%）
+            photoRate *= 0.92 + Math.random() * 0.16;
+            
+            // 确保非负
+            photoRate = Math.max(0, photoRate);
+            
+            // 计算氧气产生速率和CO₂吸收速率
+            const oxygenRate = photoRate * 22.4 * 3.6; // 转换为mL/h
+            const co2Rate = photoRate; // μmol/m²/s
+            
+            return {
+                photoRate: photoRate,
+                oxygenRate: oxygenRate,
+                co2Rate: co2Rate
+            };
+        }
+        
+        // 开始实验
+        function startExperiment() {
+            if (experimentGroups.length === 0) {
+                alert('请先生成实验装置！');
+                return;
+            }
+            
+            if (experimentRunning) {
+                return;
+            }
+            
+            experimentRunning = true;
+            experimentTime = 0;
+            recordedData = [];
+            
+            // 更新实验时长
+            maxExperimentTime = parseInt(document.getElementById('experimentDuration').value) * 60;
+            
+            // 重置实验组数据
+            experimentGroups.forEach(group => {
+                group.timeData = [];
+                group.o2ConcentrationData = [];
+                group.co2ConcentrationData = [];
+                group.oxygenRateData = [];
+                group.co2RateData = [];
+                group.currentO2Concentration = group.initialO2Concentration;
+                group.currentCO2Concentration = group.initialCO2Concentration;
+                group.oxygenRate = 0;
+                group.co2Rate = 0;
+            });
+            
+            // 初始化实时图表
+            initRealTimeChart();
+            
+            // 开始计时器
+            clearInterval(timeInterval);
+            timeInterval = setInterval(updateExperiment, 1000 / simulationSpeed);
+            
+            // 隐藏占位符
+            document.getElementById('realTimePlaceholder').style.display = 'none';
+            
+            // 禁用开始按钮
+            document.getElementById('startBtn').disabled = true;
+        }
+        
+        // 更新实验
+        function updateExperiment() {
+            experimentTime += 1;
+            
+            // 更新时间显示
+            const minutes = Math.floor(experimentTime / 60);
+            const seconds = experimentTime % 60;
+            document.getElementById('timeDisplay').textContent = 
+                `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            
+            // 更新每组数据
+            experimentGroups.forEach(group => {
+                // 计算当前光合作用速率
+                const rates = calculatePhotosynthesisRates(group);
+                group.oxygenRate = rates.oxygenRate;
+                group.co2Rate = rates.co2Rate;
+                
+                // 更新气体浓度（简化模型：浓度变化与速率成正比）
+                // 假设密闭容器体积为1L，气体浓度变化公式
+                const timeFactor = 1 / 3600; // 每秒的变化
+                
+                // 氧气浓度增加（光合作用产生氧气）
+                group.currentO2Concentration += (group.oxygenRate * 1000 / 22.4) * timeFactor;
+                
+                // CO₂浓度减少（光合作用消耗CO₂）
+                group.currentCO2Concentration -= (group.co2Rate * 1000) * timeFactor;
+                
+                // 确保浓度在合理范围内
+                group.currentO2Concentration = Math.max(200000, Math.min(250000, group.currentO2Concentration));
+                group.currentCO2Concentration = Math.max(100, Math.min(2000, group.currentCO2Concentration));
+                
+                // 记录数据点（每5秒记录一次）
+                if (experimentTime % 5 === 0) {
+                    group.timeData.push(experimentTime);
+                    group.o2ConcentrationData.push(group.currentO2Concentration);
+                    group.co2ConcentrationData.push(group.currentCO2Concentration);
+                    group.oxygenRateData.push(group.oxygenRate);
+                    group.co2RateData.push(group.co2Rate);
+                }
+                
+                // 更新装置读数
+                const readingElement = document.getElementById(`reading${group.id}`);
+                const dependentType = getDependentType();
+                
+                if (readingElement) {
+                    switch(dependentType) {
+                        case 'oxygen-concentration':
+                            readingElement.textContent = group.currentO2Concentration.toFixed(0);
+                            break;
+                        case 'oxygen-rate':
+                            readingElement.textContent = group.oxygenRate.toFixed(2);
+                            break;
+                        case 'co2-rate':
+                            readingElement.textContent = group.co2Rate.toFixed(2);
+                            break;
+                    }
+                }
+                
+                // 更新气泡
+                updateBubbles(group.id, group.oxygenRate);
+            });
+            
+            // 更新实时图表
+            updateRealTimeChart();
+            
+            // 实验达到设定时长时结束
+            if (experimentTime >= maxExperimentTime) {
+                clearInterval(timeInterval);
+                experimentRunning = false;
+                document.getElementById('startBtn').disabled = false;
+                alert('实验已完成！可以整理数据进行分析。');
+            }
+        }
+        
+        // 更新气泡
+        function updateBubbles(groupId, oxygenRate) {
+            const bubblesContainer = document.getElementById(`bubbles${groupId}`);
+            if (!bubblesContainer) return;
+            
+            // 清空气泡
+            bubblesContainer.innerHTML = '';
+            
+            // 根据氧气产生速率生成气泡数量
+            const bubbleCount = Math.min(15, Math.floor(oxygenRate / 10));
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.left = `${30 + Math.random() * 40}%`;
+                bubble.style.animationDuration = `${1 + Math.random() * 2}s`;
+                bubble.style.animationDelay = `${Math.random() * 2}s`;
+                bubble.style.width = `${8 + Math.random() * 8}px`;
+                bubble.style.height = bubble.style.width;
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+        
+        // 初始化实时图表
+        function initRealTimeChart() {
+            const ctx = document.getElementById('realTimeChart').getContext('2d');
+            
+            if (realTimeChart) {
+                realTimeChart.destroy();
+            }
+            
+            const datasets = experimentGroups.map((group, index) => ({
+                label: `实验组 ${group.id}`,
+                data: [],
+                borderColor: chartColors[index % chartColors.length],
+                backgroundColor: chartColors[index % chartColors.length] + '20',
+                borderWidth: 3,
+                fill: false,
+                tension: 0.4,
+                pointRadius: 3,
+                pointHoverRadius: 7,
+                pointBackgroundColor: chartColors[index % chartColors.length]
+            }));
+            
+            realTimeChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: '时间 (秒)',
+                                font: {
+                                    size: 18, // 增大字体大小
+                                    weight: 'bold',
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif"
+                                },
+                                color: '#1e7e34', // 加深颜色
+                                padding: {top: 15, bottom: 15} // 增加内边距
+                            },
+                            min: 0,
+                            max: maxExperimentTime,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.08)',
+                                drawBorder: true,
+                                borderColor: 'rgba(0, 0, 0, 0.15)'
+                            },
+                            ticks: {
+                                color: '#333', // 加深颜色
+                                font: {
+                                    size: 16, // 增大字体大小
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif",
+                                    weight: '500'
+                                },
+                                padding: 10
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: getDependentName() + ' (' + getDependentUnit() + ')',
+                                font: {
+                                    size: 18, // 增大字体大小
+                                    weight: 'bold',
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif"
+                                },
+                                color: '#1e7e34', // 加深颜色
+                                padding: {top: 15, bottom: 15} // 增加内边距
+                            },
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.08)',
+                                drawBorder: true,
+                                borderColor: 'rgba(0, 0, 0, 0.15)'
+                            },
+                            ticks: {
+                                color: '#333', // 加深颜色
+                                font: {
+                                    size: 16, // 增大字体大小
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif",
+                                    weight: '500'
+                                },
+                                padding: 10
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // 我们将使用自定义图例
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(255, 255, 255, 0.97)',
+                            titleColor: '#1e7e34',
+                            bodyColor: '#333',
+                            borderColor: '#c8e6c9',
+                            borderWidth: 2,
+                            boxPadding: 5,
+                            titleFont: {
+                                size: 14,
+                                family: "'Segoe UI', 'Microsoft YaHei', sans-serif",
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 14,
+                                family: "'Segoe UI', 'Microsoft YaHei', sans-serif"
+                            },
+                            padding: 12
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'nearest'
+                    },
+                    animation: {
+                        duration: 500
+                    }
+                }
+            });
+            
+            // 创建自定义图例
+            updateLegend();
+        }
+        
+        // 更新自定义图例
+        function updateLegend() {
+            const legendContainer = document.getElementById('realTimeLegend');
+            if (!legendContainer) return;
+            
+            let legendHTML = '';
+            experimentGroups.forEach((group, index) => {
+                const independentVar = group.independentVar;
+                const independentValue = group.independentValue;
+                const varName = getVarName(independentVar);
+                const varUnit = getVarUnit(independentVar);
+                
+                legendHTML += `
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: ${chartColors[index % chartColors.length]}"></div>
+                        <span>组${group.id}: ${varName}=${independentValue}${varUnit}</span>
+                    </div>
+                `;
+            });
+            
+            legendContainer.innerHTML = legendHTML;
+        }
+        
+        // 更新实时图表
+        function updateRealTimeChart() {
+            if (!realTimeChart) return;
+            
+            // 更新x轴标签（只保留最近的点）
+            const timeLabels = experimentGroups[0].timeData.map(t => t.toString());
+            realTimeChart.data.labels = timeLabels;
+            
+            // 根据应变量类型更新数据
+            const dependentType = getDependentType();
+            
+            experimentGroups.forEach((group, index) => {
+                switch(dependentType) {
+                    case 'oxygen-concentration':
+                        realTimeChart.data.datasets[index].data = group.o2ConcentrationData;
+                        break;
+                    case 'oxygen-rate':
+                        realTimeChart.data.datasets[index].data = group.oxygenRateData;
+                        break;
+                    case 'co2-rate':
+                        realTimeChart.data.datasets[index].data = group.co2RateData;
+                        break;
+                }
+            });
+            
+            realTimeChart.update('none');
+        }
+        
+        // 数据整理（原记录数据）
+        function recordData() {
+            if (experimentGroups.length === 0) {
+                alert('请先生成实验装置并运行实验！');
+                return;
+            }
+            
+            // 收集数据
+            const dataPoint = {
+                independentVar: experimentGroups[0].independentVar,
+                independentVarName: getVarName(experimentGroups[0].independentVar),
+                dependentVarName: getDependentName(),
+                dependentUnit: getDependentUnit(),
+                dependentType: getDependentType(),
+                groups: []
+            };
+            
+            experimentGroups.forEach(group => {
+                // 取最后10秒的平均值作为稳定值
+                let avgValue;
+                const dependentType = getDependentType();
+                
+                switch(dependentType) {
+                    case 'oxygen-concentration':
+                        const recentO2 = group.o2ConcentrationData.slice(-2);
+                        avgValue = recentO2.length > 0 ? 
+                            recentO2.reduce((a, b) => a + b, 0) / recentO2.length : 
+                            group.currentO2Concentration;
+                        break;
+                    case 'oxygen-rate':
+                        const recentO2Rate = group.oxygenRateData.slice(-2);
+                        avgValue = recentO2Rate.length > 0 ? 
+                            recentO2Rate.reduce((a, b) => a + b, 0) / recentO2Rate.length : 
+                            group.oxygenRate;
+                        break;
+                    case 'co2-rate':
+                        const recentCO2Rate = group.co2RateData.slice(-2);
+                        avgValue = recentCO2Rate.length > 0 ? 
+                            recentCO2Rate.reduce((a, b) => a + b, 0) / recentCO2Rate.length : 
+                            group.co2Rate;
+                        break;
+                    default:
+                        avgValue = 0;
+                }
+                
+                dataPoint.groups.push({
+                    id: group.id,
+                    independentValue: group.independentValue,
+                    dependentValue: avgValue
+                });
+            });
+            
+            recordedData.push(dataPoint);
+            
+            // 更新柱状图
+            updateBarChart();
+            
+            // 如果实验组数≥5，更新折线图
+            if (experimentGroups.length >= 5) {
+                updateLineChart();
+                document.getElementById('lineChartSection').style.display = 'block';
+            }
+            
+            // 隐藏柱状图占位符
+            document.getElementById('barChartPlaceholder').style.display = 'none';
+            
+            // 启用开始按钮
+            document.getElementById('startBtn').disabled = false;
+            
+            alert(`已整理第${recordedData.length}组数据！`);
+        }
+        
+        // 更新柱状图
+        function updateBarChart() {
+            const ctx = document.getElementById('barChart').getContext('2d');
+            
+            if (barChart) {
+                barChart.destroy();
+            }
+            
+            // 使用最新记录的数据
+            const latestData = recordedData[recordedData.length - 1];
+            if (!latestData) return;
+            
+            // 计算数据的最小值和最大值，用于调整纵坐标范围
+            const values = latestData.groups.map(g => g.dependentValue);
+            const minValue = Math.min(...values);
+            const maxValue = Math.max(...values);
+            const valueRange = maxValue - minValue;
+            
+            // 根据应变量类型决定纵坐标是否从0开始
+            let yBeginAtZero = true;
+            let suggestedMin = 0;
+            let suggestedMax = maxValue * 1.1; // 默认最大值增加10%
+            
+            // 对于氧气浓度，不强制从0开始，以凸显差异
+            if (latestData.dependentType === 'oxygen-concentration') {
+                yBeginAtZero = false;
+                suggestedMin = minValue - (valueRange * 0.1); // 最小值减少10%的范围
+                suggestedMax = maxValue + (valueRange * 0.1); // 最大值增加10%的范围
+                
+                // 确保最小值不会低于0
+                if (suggestedMin < 0) suggestedMin = 0;
+            }
+            
+            barChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: latestData.groups.map(g => `组${g.id}`),
+                    datasets: [{
+                        label: latestData.dependentVarName,
+                        data: latestData.groups.map(g => g.dependentValue),
+                        backgroundColor: chartColors.slice(0, latestData.groups.length).map(color => color + 'CC'),
+                        borderColor: chartColors.slice(0, latestData.groups.length),
+                        borderWidth: 2,
+                        hoverBackgroundColor: chartColors.slice(0, latestData.groups.length),
+                        borderRadius: 8,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: yBeginAtZero,
+                            suggestedMin: suggestedMin,
+                            suggestedMax: suggestedMax,
+                            title: {
+                                display: true,
+                                text: latestData.dependentVarName + latestData.dependentUnit,
+                                font: {
+                                    size: 18, // 增大字体大小
+                                    weight: 'bold',
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif"
+                                },
+                                color: '#1e7e34', // 加深颜色
+                                padding: {top: 15, bottom: 15} // 增加内边距
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.08)',
+                                drawBorder: true,
+                                borderColor: 'rgba(0, 0, 0, 0.15)'
+                            },
+                            ticks: {
+                                color: '#333', // 加深颜色
+                                font: {
+                                    size: 16, // 增大字体大小
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif",
+                                    weight: '500'
+                                },
+                                padding: 10,
+                                callback: function(value) {
+                                    // 对于大数值，使用千位分隔符
+                                    if (value >= 1000) {
+                                        return value.toLocaleString();
+                                    }
+                                    return value;
+                                }
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: '实验组',
+                                font: {
+                                    size: 18, // 增大字体大小
+                                    weight: 'bold',
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif"
+                                },
+                                color: '#1e7e34', // 加深颜色
+                                padding: {top: 15, bottom: 15} // 增加内边距
+                            },
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#333', // 加深颜色
+                                font: {
+                                    size: 16, // 增大字体大小
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif",
+                                    weight: '500'
+                                },
+                                padding: 10
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const groupIndex = context.dataIndex;
+                                    const group = latestData.groups[groupIndex];
+                                    const value = context.parsed.y;
+                                    let formattedValue = value.toFixed(2);
+                                    
+                                    // 对于大数值，显示更友好的格式
+                                    if (value >= 1000) {
+                                        formattedValue = value.toLocaleString(undefined, {
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 0
+                                        });
+                                    }
+                                    
+                                    return [
+                                        `${latestData.independentVarName}: ${group.independentValue}${getVarUnit(latestData.independentVar)}`,
+                                        `${latestData.dependentVarName}: ${formattedValue}${latestData.dependentUnit}`
+                                    ];
+                                }
+                            },
+                            backgroundColor: 'rgba(255, 255, 255, 0.97)',
+                            titleColor: '#1e7e34',
+                            bodyColor: '#333',
+                            borderColor: '#c8e6c9',
+                            borderWidth: 2,
+                            boxPadding: 5,
+                            titleFont: {
+                                size: 14,
+                                family: "'Segoe UI', 'Microsoft YaHei', sans-serif",
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 14,
+                                family: "'Segoe UI', 'Microsoft YaHei', sans-serif"
+                            },
+                            padding: 12
+                        }
+                    },
+                    // 调整柱子宽度（变细）
+                    barPercentage: 0.65,
+                    categoryPercentage: 0.75
+                }
+            });
+        }
+        
+        // 更新折线图
+        function updateLineChart() {
+            const ctx = document.getElementById('lineChart').getContext('2d');
+            
+            if (lineChart) {
+                lineChart.destroy();
+            }
+            
+            // 使用最新记录的数据
+            const latestData = recordedData[recordedData.length - 1];
+            if (!latestData) return;
+            
+            // 按自变量值排序
+            const sortedGroups = [...latestData.groups].sort((a, b) => a.independentValue - b.independentValue);
+            
+            lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: sortedGroups.map(g => g.independentValue.toString() + getVarUnit(latestData.independentVar)),
+                    datasets: [{
+                        label: latestData.dependentVarName,
+                        data: sortedGroups.map(g => g.dependentValue),
+                        borderColor: '#34a853',
+                        backgroundColor: 'rgba(52, 168, 83, 0.1)',
+                        borderWidth: 4,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: sortedGroups.map((g, i) => chartColors[i % chartColors.length]),
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 3,
+                        pointRadius: 8,
+                        pointHoverRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: latestData.dependentVarName + latestData.dependentUnit,
+                                font: {
+                                    size: 18, // 增大字体大小
+                                    weight: 'bold',
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif"
+                                },
+                                color: '#1e7e34', // 加深颜色
+                                padding: {top: 15, bottom: 15} // 增加内边距
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.08)',
+                                drawBorder: true,
+                                borderColor: 'rgba(0, 0, 0, 0.15)'
+                            },
+                            ticks: {
+                                color: '#333', // 加深颜色
+                                font: {
+                                    size: 16, // 增大字体大小
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif",
+                                    weight: '500'
+                                },
+                                padding: 10
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: latestData.independentVarName + ' (' + getVarUnit(latestData.independentVar) + ')',
+                                font: {
+                                    size: 18, // 增大字体大小
+                                    weight: 'bold',
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif"
+                                },
+                                color: '#1e7e34', // 加深颜色
+                                padding: {top: 15, bottom: 15} // 增加内边距
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.08)',
+                                drawBorder: true,
+                                borderColor: 'rgba(0, 0, 0, 0.15)'
+                            },
+                            ticks: {
+                                color: '#333', // 加深颜色
+                                font: {
+                                    size: 16, // 增大字体大小
+                                    family: "'Segoe UI', 'Microsoft YaHei', sans-serif",
+                                    weight: '500'
+                                },
+                                padding: 10
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${latestData.dependentVarName}: ${context.parsed.y.toFixed(2)}${latestData.dependentUnit}`;
+                                }
+                            },
+                            backgroundColor: 'rgba(255, 255, 255, 0.97)',
+                            titleColor: '#1e7e34',
+                            bodyColor: '#333',
+                            borderColor: '#c8e6c9',
+                            borderWidth: 2,
+                            boxPadding: 5,
+                            titleFont: {
+                                size: 14,
+                                family: "'Segoe UI', 'Microsoft YaHei', sans-serif",
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 14,
+                                family: "'Segoe UI', 'Microsoft YaHei', sans-serif"
+                            },
+                            padding: 12
+                        }
+                    }
+                }
+            });
+            
+            // 隐藏折线图占位符
+            document.getElementById('lineChartPlaceholder').style.display = 'none';
+        }
+        
+        // 改变模拟速度
+        function changeSpeed() {
+            simulationSpeed = parseInt(document.getElementById('speedControl').value);
+            
+            if (experimentRunning) {
+                clearInterval(timeInterval);
+                timeInterval = setInterval(updateExperiment, 1000 / simulationSpeed);
+            }
+        }
+        
+        // 重置实验
+        function resetExperiment() {
+            clearInterval(timeInterval);
+            experimentRunning = false;
+            experimentTime = 0;
+            experimentGroups = [];
+            recordedData = [];
+            
+            document.getElementById('timeDisplay').textContent = '0:00';
+            document.getElementById('apparatusSection').style.display = 'none';
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('recordBtn').disabled = true;
+            
+            // 显示占位符
+            document.getElementById('realTimePlaceholder').style.display = 'flex';
+            document.getElementById('barChartPlaceholder').style.display = 'flex';
+            document.getElementById('lineChartPlaceholder').style.display = 'flex';
+            document.getElementById('lineChartSection').style.display = 'none';
+            
+            // 清除图例
+            document.getElementById('realTimeLegend').innerHTML = '';
+            
+            // 清除图表
+            if (realTimeChart) {
+                realTimeChart.destroy();
+                realTimeChart = null;
+            }
+            
+            if (barChart) {
+                barChart.destroy();
+                barChart = null;
+            }
+            
+            if (lineChart) {
+                lineChart.destroy();
+                lineChart = null;
+            }
+            
+            alert('实验已重置！');
+        }
+        
+        // 监听自变量变化
+        document.getElementById('independentVar').addEventListener('change', function() {
+            generateParamInputs();
+            document.getElementById('apparatusSection').style.display = 'none';
+            document.getElementById('recordBtn').disabled = true;
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('lineChartSection').style.display = 'none';
+        });
+        
+        // 监听实验组数变化
+        document.getElementById('groupCount').addEventListener('change', generateParamInputs);
+        
+        // 监听波长参数变化
+        document.addEventListener('input', function(e) {
+            if (e.target.id.startsWith('param') && document.getElementById('independentVar').value === 'wavelength') {
+                updateWavelengthColors();
+            }
+        });
+    </script>
+</body>
+</html>
